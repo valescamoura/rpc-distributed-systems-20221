@@ -1,5 +1,6 @@
 import rpyc
 import sys
+import time
 from random import randint
  
 def generate_and_sum_vector(conn, n):
@@ -15,7 +16,8 @@ if __name__ == "__main__":
       exit("Usage {} SERVER LEN_ARRAY".format(sys.argv[0]))
    
    server = sys.argv[1]
-   
+   start = time.time()
    conn = rpyc.connect(server, 18861)
-
    print('Sum array = ', generate_and_sum_vector(conn.root, int(sys.argv[2])))
+   end = time.time()
+   print('Time client = ', end-start)
