@@ -18,6 +18,7 @@ if __name__ == "__main__":
    server = sys.argv[1]
    start = time.time()
    conn = rpyc.connect(server, 18861)
+   conn._config['sync_request_timeout'] = None
    print('Sum array = ', generate_and_sum_vector(conn.root, int(sys.argv[2])))
    end = time.time()
    print('Time client = ', end-start)
