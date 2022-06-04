@@ -11,7 +11,7 @@ class MyService(rpyc.Service):
         pass
     def on_disconnect(self, conn):
         self.end = time.time()
-        print(self.end-self.start)
+        print('Time server = ', self.end-self.start)
         print('Disconnected!')
         #  código que é executado quando uma conexão é finalizada, caso seja necessário
         pass
