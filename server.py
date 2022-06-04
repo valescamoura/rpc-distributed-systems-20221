@@ -6,12 +6,13 @@ class MyService(rpyc.Service):
     end = 0
     def on_connect(self, conn):
         # código que é executado quando uma conexão é iniciada, caso seja necessário
-        print('Conectou!')
+        print('Connected!')
         self.start = time.time()
         pass
     def on_disconnect(self, conn):
         self.end = time.time()
         print(self.end-self.start)
+        print('Disconnected!')
         #  código que é executado quando uma conexão é finalizada, caso seja necessário
         pass
     def exposed_get_answer(self): # este é um método exposto
