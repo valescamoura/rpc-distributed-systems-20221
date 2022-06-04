@@ -1,5 +1,6 @@
 import rpyc
 import time
+import copy 
 
 class MyService(rpyc.Service):
     start = 0
@@ -20,7 +21,8 @@ class MyService(rpyc.Service):
     exposed_the_real_answer_though = 43     # este é um atributo exposto
     def get_question(self):  # este método não é exposto
         return "Qual é  a cor do cavalo branco de Napoleão?"
-    def exposed_sum_array(self, array):
+    def exposed_sum_array(self, a):
+        array = copy.deepcopy(a)
         sum = 0
         for i in range(len(array)):
             sum += array[i]
@@ -29,5 +31,8 @@ class MyService(rpyc.Service):
 #Para iniciar o servidor
 if __name__ == "__main__":
     from rpyc.utils.server import ThreadedServer
-    t = ThreadedServer(MyService, port=18861)
+    t = ThreadedServer(MyService, port=18861, protocol_config={'allow_public_a_ttrs':True, 'allow_pickle': True})
     t.start()
+
+
+
